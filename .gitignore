@@ -8,8 +8,8 @@
 #IDE
 .idea
 
-#outputs
-names.txt
+# build
+.next
 
 # testing
 /coverage
