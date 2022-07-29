@@ -24,7 +24,15 @@ new Prefetcher({
                 maxMatches: 100, // limits the number of matched elements to prefetch to 1 per page
                 attribute: 'src', // the attribute holding the URL to prefetching
                 as: 'video', // the type of asset being prefetched
-            }
+            },
+            // Deep fetch images
+            {
+                selector: 'img', // CSS selector syntax - just like you would use with document.querySelector()
+                callback: el => {
+                    console.log("Found img on prefetched page");
+                    console.log(el);
+                }
+            },
         ])
     ]
 }).route()

@@ -9,6 +9,7 @@ import {useEffect} from "react";
 export default function Home() {
 
   useEffect(() => {
+    prefetch('/page.html')
     prefetch('/about')
     prefetch('/gallery')
   }, [])

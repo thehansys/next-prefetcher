@@ -1,0 +1,1111 @@
+{
+  "version": "4.17.1-next-1658839841-109668f53.0",
+  "backends": {},
+  "destinations": {
+    "default": {
+      "index": 0,
+      "errorRoutes": [],
+      "routes": [
+        {
+          "path": "/__layer0__/cache-manifest.js",
+          "routeJson": "{\"path\":\"/__layer0__/cache-manifest.js\"}",
+          "match": [
+            {
+              "value": "${path}",
+              "matchRegex": "(?i)^/__layer0__/cache-manifest\\.js[/#\\?]?$"
+            }
+          ],
+          "matchResp": [],
+          "cache": {
+            "maxAgeSeconds": 31536000
+          },
+          "route": {
+            "action": "proxy",
+            "backend": "__js__"
+          },
+          "transform": {
+            "request": [],
+            "upstreamResponse": [
+              {
+                "action": "set-header",
+                "name": "vary",
+                "value": "accept-encoding"
+              }
+            ],
+            "response": [
+              {
+                "action": "set-header",
+                "name": "cache-control",
+                "value": "private, max-age=3600"
+              },
+              {
+                "action": "set-header",
+                "name": "content-type",
+                "value": "text/javascript"
+              },
+              {
+                "action": "set-header",
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              }
+            ]
+          }
+        },
+        {
+          "path": "/__layer0__/devtools/enable",
+          "routeJson": "{\"method\":\"get\",\"path\":\"/__layer0__/devtools/enable\"}",
+          "match": [
+            {
+              "value": "${path}",
+              "matchRegex": "(?i)^/__layer0__/devtools/enable[/#\\?]?$"
+            },
+            {
+              "value": "${method}",
+              "matchRegex": "(?i)^get$"
+            }
+          ],
+          "matchResp": [],
+          "route": {
+            "action": "synthetic-response",
+            "statusCode": 302
+          },
+          "transform": {
+            "request": [],
+            "upstreamResponse": [
+              {
+                "action": "set-header",
+                "name": "vary",
+                "value": "accept-encoding"
+              }
+            ],
+            "response": [
+              {
+                "action": "add-cookie",
+                "name": "layer0_devtools_enabled",
+                "value": "true; Path=/"
+              },
+              {
+                "action": "set-header",
+                "name": "location",
+                "value": "${url}"
+              },
+              {
+                "action": "update-header",
+                "name": "location",
+                "valueRegex": "(?i)^/__layer0__/devtools/enable(\\?[^#]+)?[/#\\?]?$",
+                "replaceValue": "/\\1"
+              }
+            ]
+          }
+        },
+        {
+          "path": "/__layer0__/devtools/disable",
+          "routeJson": "{\"method\":\"get\",\"path\":\"/__layer0__/devtools/disable\"}",
+          "match": [
+            {
+              "value": "${path}",
+              "matchRegex": "(?i)^/__layer0__/devtools/disable[/#\\?]?$"
+            },
+            {
+              "value": "${method}",
+              "matchRegex": "(?i)^get$"
+            }
+          ],
+          "matchResp": [],
+          "route": {
+            "action": "synthetic-response",
+            "statusCode": 302
+          },
+          "transform": {
+            "request": [],
+            "upstreamResponse": [
+              {
+                "action": "set-header",
+                "name": "vary",
+                "value": "accept-encoding"
+              }
+            ],
+            "response": [
+              {
+                "action": "add-cookie",
+                "name": "layer0_devtools_enabled",
+                "value": "false; Path=/"
+              },
+              {
+                "action": "set-header",
+                "name": "location",
+                "value": "${url}"
+              },
+              {
+                "action": "update-header",
+                "name": "location",
+                "valueRegex": "(?i)^/__layer0__/devtools/disable(\\?[^#]+)?[/#\\?]?$",
+                "replaceValue": "/\\1"
+              }
+            ]
+          }
+        },
+        {
+          "path": "/__layer0__/devtools/:path*",
+          "routeJson": "{\"path\":\"/__layer0__/devtools/:path*\"}",
+          "match": [
+            {
+              "value": "${path}",
+              "matchRegex": "(?i)^/__layer0__/devtools(?:/((?:[^/#\\?]+?)(?:/(?:[^/#\\?]+?))*))?[/#\\?]?$"
+            }
+          ],
+          "matchResp": [],
+          "cache": {
+            "maxAgeSeconds": 315360000
+          },
+          "route": {
+            "action": "proxy",
+            "backend": "__static__",
+            "fsPath": [
+              "/node_modules/@layer0/devtools/widget/:path*"
+            ],
+            "fallbackToCompute": false
+          },
+          "transform": {
+            "request": [
+              {
+                "action": "update-path",
+                "valueRegex": "(?i)^/__layer0__/devtools(?:/((?:[^/#\\?]+?)(?:/(?:[^/#\\?]+?))*))?[/#\\?]?$",
+                "replaceValue": "/node_modules/@layer0/devtools/widget/\\1"
+              }
+            ],
+            "upstreamResponse": [
+              {
+                "action": "set-header",
+                "name": "vary",
+                "value": "accept-encoding"
+              }
+            ],
+            "response": [
+              {
+                "action": "set-header",
+                "name": "cache-control",
+                "value": "private, no-store, no-cache"
+              }
+            ]
+          }
+        },
+        {
+          "path": "/service-worker.js",
+          "routeJson": "{\"path\":\"/service-worker.js\"}",
+          "match": [
+            {
+              "value": "${path}",
+              "matchRegex": "(?i)^/service-worker\\.js[/#\\?]?$"
+            }
+          ],
+          "matchResp": [],
+          "cache": {
+            "maxAgeSeconds": 30758400
+          },
+          "route": {
+            "action": "proxy",
+            "backend": "__static__",
+            "fsPath": [
+              "/.next/static/service-worker.js"
+            ],
+            "fallbackToCompute": false
+          },
+          "transform": {
+            "request": [
+              {
+                "action": "update-path",
+                "valueRegex": "(?i)^/service-worker\\.js[/#\\?]?$",
+                "replaceValue": "/.next/static/service-worker.js"
+              }
+            ],
+            "upstreamResponse": [
+              {
+                "action": "set-header",
+                "name": "vary",
+                "value": "accept-encoding"
+              }
+            ],
+            "response": [
+              {
+                "action": "set-header",
+                "name": "cache-control",
+                "value": "private, no-store, no-cache"
+              }
+            ]
+          }
+        },
+        {
+          "path": "/(.*)",
+          "routeJson": "{\"path\":\"/(.*)\"}",
+          "match": [
+            {
+              "value": "${path}",
+              "matchRegex": "(?i)^(?:/(.*))[/#\\?]?$"
+            }
+          ],
+          "matchResp": [],
+          "cache": {
+            "maxAgeSeconds": 3600,
+            "staleWhileRevalidateSeconds": 86400
+          },
+          "transform": {
+            "request": [],
+            "upstreamResponse": [],
+            "response": []
+          }
+        },
+        {
+          "path": "/favicon.ico",
+          "routeJson": "{\"path\":\"/favicon.ico\",\"label\":\"static('public')\"}",
+          "match": [
+            {
+              "value": "${path}",
+              "matchRegex": "(?i)^/favicon\\.ico[/#\\?]?$"
+            }
+          ],
+          "matchResp": [],
+          "cache": {
+            "maxAgeSeconds": 315360000
+          },
+          "route": {
+            "action": "proxy",
+            "backend": "__static__",
+            "fsPath": [
+              "/public/favicon.ico"
+            ],
+            "fallbackToCompute": false
+          },
+          "transform": {
+            "request": [
+              {
+                "action": "update-path",
+                "valueRegex": "(?i)^/favicon\\.ico[/#\\?]?$",
+                "replaceValue": "/public/favicon.ico"
+              }
+            ],
+            "upstreamResponse": [
+              {
+                "action": "set-header",
+                "name": "vary",
+                "value": "accept-encoding"
+              }
+            ],
+            "response": []
+          }
+        },
+        {
+          "path": "/vercel.svg",
+          "routeJson": "{\"path\":\"/vercel.svg\",\"label\":\"static('public')\"}",
+          "match": [
+            {
+              "value": "${path}",
+              "matchRegex": "(?i)^/vercel\\.svg[/#\\?]?$"
+            }
+          ],
+          "matchResp": [],
+          "cache": {
+            "maxAgeSeconds": 315360000
+          },
+          "route": {
+            "action": "proxy",
+            "backend": "__static__",
+            "fsPath": [
+              "/public/vercel.svg"
+            ],
+            "fallbackToCompute": false
+          },
+          "transform": {
+            "request": [
+              {
+                "action": "update-path",
+                "valueRegex": "(?i)^/vercel\\.svg[/#\\?]?$",
+                "replaceValue": "/public/vercel.svg"
+              }
+            ],
+            "upstreamResponse": [
+              {
+                "action": "set-header",
+                "name": "vary",
+                "value": "accept-encoding"
+              }
+            ],
+            "response": []
+          }
+        },
+        {
+          "path": "/img/1.jpg",
+          "routeJson": "{\"path\":\"/img/1.jpg\",\"label\":\"static('public')\"}",
+          "match": [
+            {
+              "value": "${path}",
+              "matchRegex": "(?i)^/img/1\\.jpg[/#\\?]?$"
+            }
+          ],
+          "matchResp": [],
+          "cache": {
+            "maxAgeSeconds": 315360000
+          },
+          "route": {
+            "action": "proxy",
+            "backend": "__static__",
+            "fsPath": [
+              "/public/img/1.jpg"
+            ],
+            "fallbackToCompute": false
+          },
+          "transform": {
+            "request": [
+              {
+                "action": "update-path",
+                "valueRegex": "(?i)^/img/1\\.jpg[/#\\?]?$",
+                "replaceValue": "/public/img/1.jpg"
+              }
+            ],
+            "upstreamResponse": [
+              {
+                "action": "set-header",
+                "name": "vary",
+                "value": "accept-encoding"
+              }
+            ],
+            "response": []
+          }
+        },
+        {
+          "path": "/img/2.jpg",
+          "routeJson": "{\"path\":\"/img/2.jpg\",\"label\":\"static('public')\"}",
+          "match": [
+            {
+              "value": "${path}",
+              "matchRegex": "(?i)^/img/2\\.jpg[/#\\?]?$"
+            }
+          ],
+          "matchResp": [],
+          "cache": {
+            "maxAgeSeconds": 315360000
+          },
+          "route": {
+            "action": "proxy",
+            "backend": "__static__",
+            "fsPath": [
+              "/public/img/2.jpg"
+            ],
+            "fallbackToCompute": false
+          },
+          "transform": {
+            "request": [
+              {
+                "action": "update-path",
+                "valueRegex": "(?i)^/img/2\\.jpg[/#\\?]?$",
+                "replaceValue": "/public/img/2.jpg"
+              }
+            ],
+            "upstreamResponse": [
+              {
+                "action": "set-header",
+                "name": "vary",
+                "value": "accept-encoding"
+              }
+            ],
+            "response": []
+          }
+        },
+        {
+          "path": "/img/3.jpg",
+          "routeJson": "{\"path\":\"/img/3.jpg\",\"label\":\"static('public')\"}",
+          "match": [
+            {
+              "value": "${path}",
+              "matchRegex": "(?i)^/img/3\\.jpg[/#\\?]?$"
+            }
+          ],
+          "matchResp": [],
+          "cache": {
+            "maxAgeSeconds": 315360000
+          },
+          "route": {
+            "action": "proxy",
+            "backend": "__static__",
+            "fsPath": [
+              "/public/img/3.jpg"
+            ],
+            "fallbackToCompute": false
+          },
+          "transform": {
+            "request": [
+              {
+                "action": "update-path",
+                "valueRegex": "(?i)^/img/3\\.jpg[/#\\?]?$",
+                "replaceValue": "/public/img/3.jpg"
+              }
+            ],
+            "upstreamResponse": [
+              {
+                "action": "set-header",
+                "name": "vary",
+                "value": "accept-encoding"
+              }
+            ],
+            "response": []
+          }
+        },
+        {
+          "path": "/img/4.jpg",
+          "routeJson": "{\"path\":\"/img/4.jpg\",\"label\":\"static('public')\"}",
+          "match": [
+            {
+              "value": "${path}",
+              "matchRegex": "(?i)^/img/4\\.jpg[/#\\?]?$"
+            }
+          ],
+          "matchResp": [],
+          "cache": {
+            "maxAgeSeconds": 315360000
+          },
+          "route": {
+            "action": "proxy",
+            "backend": "__static__",
+            "fsPath": [
+              "/public/img/4.jpg"
+            ],
+            "fallbackToCompute": false
+          },
+          "transform": {
+            "request": [
+              {
+                "action": "update-path",
+                "valueRegex": "(?i)^/img/4\\.jpg[/#\\?]?$",
+                "replaceValue": "/public/img/4.jpg"
+              }
+            ],
+            "upstreamResponse": [
+              {
+                "action": "set-header",
+                "name": "vary",
+                "value": "accept-encoding"
+              }
+            ],
+            "response": []
+          }
+        },
+        {
+          "path": "/img/5.jpg",
+          "routeJson": "{\"path\":\"/img/5.jpg\",\"label\":\"static('public')\"}",
+          "match": [
+            {
+              "value": "${path}",
+              "matchRegex": "(?i)^/img/5\\.jpg[/#\\?]?$"
+            }
+          ],
+          "matchResp": [],
+          "cache": {
+            "maxAgeSeconds": 315360000
+          },
+          "route": {
+            "action": "proxy",
+            "backend": "__static__",
+            "fsPath": [
+              "/public/img/5.jpg"
+            ],
+            "fallbackToCompute": false
+          },
+          "transform": {
+            "request": [
+              {
+                "action": "update-path",
+                "valueRegex": "(?i)^/img/5\\.jpg[/#\\?]?$",
+                "replaceValue": "/public/img/5.jpg"
+              }
+            ],
+            "upstreamResponse": [
+              {
+                "action": "set-header",
+                "name": "vary",
+                "value": "accept-encoding"
+              }
+            ],
+            "response": []
+          }
+        },
+        {
+          "path": "/img/6.jpg",
+          "routeJson": "{\"path\":\"/img/6.jpg\",\"label\":\"static('public')\"}",
+          "match": [
+            {
+              "value": "${path}",
+              "matchRegex": "(?i)^/img/6\\.jpg[/#\\?]?$"
+            }
+          ],
+          "matchResp": [],
+          "cache": {
+            "maxAgeSeconds": 315360000
+          },
+          "route": {
+            "action": "proxy",
+            "backend": "__static__",
+            "fsPath": [
+              "/public/img/6.jpg"
+            ],
+            "fallbackToCompute": false
+          },
+          "transform": {
+            "request": [
+              {
+                "action": "update-path",
+                "valueRegex": "(?i)^/img/6\\.jpg[/#\\?]?$",
+                "replaceValue": "/public/img/6.jpg"
+              }
+            ],
+            "upstreamResponse": [
+              {
+                "action": "set-header",
+                "name": "vary",
+                "value": "accept-encoding"
+              }
+            ],
+            "response": []
+          }
+        },
+        {
+          "path": "/img/7.jpg",
+          "routeJson": "{\"path\":\"/img/7.jpg\",\"label\":\"static('public')\"}",
+          "match": [
+            {
+              "value": "${path}",
+              "matchRegex": "(?i)^/img/7\\.jpg[/#\\?]?$"
+            }
+          ],
+          "matchResp": [],
+          "cache": {
+            "maxAgeSeconds": 315360000
+          },
+          "route": {
+            "action": "proxy",
+            "backend": "__static__",
+            "fsPath": [
+              "/public/img/7.jpg"
+            ],
+            "fallbackToCompute": false
+          },
+          "transform": {
+            "request": [
+              {
+                "action": "update-path",
+                "valueRegex": "(?i)^/img/7\\.jpg[/#\\?]?$",
+                "replaceValue": "/public/img/7.jpg"
+              }
+            ],
+            "upstreamResponse": [
+              {
+                "action": "set-header",
+                "name": "vary",
+                "value": "accept-encoding"
+              }
+            ],
+            "response": []
+          }
+        },
+        {
+          "path": "/img/8.jpg",
+          "routeJson": "{\"path\":\"/img/8.jpg\",\"label\":\"static('public')\"}",
+          "match": [
+            {
+              "value": "${path}",
+              "matchRegex": "(?i)^/img/8\\.jpg[/#\\?]?$"
+            }
+          ],
+          "matchResp": [],
+          "cache": {
+            "maxAgeSeconds": 315360000
+          },
+          "route": {
+            "action": "proxy",
+            "backend": "__static__",
+            "fsPath": [
+              "/public/img/8.jpg"
+            ],
+            "fallbackToCompute": false
+          },
+          "transform": {
+            "request": [
+              {
+                "action": "update-path",
+                "valueRegex": "(?i)^/img/8\\.jpg[/#\\?]?$",
+                "replaceValue": "/public/img/8.jpg"
+              }
+            ],
+            "upstreamResponse": [
+              {
+                "action": "set-header",
+                "name": "vary",
+                "value": "accept-encoding"
+              }
+            ],
+            "response": []
+          }
+        },
+        {
+          "path": "/vid/1.mp4",
+          "routeJson": "{\"path\":\"/vid/1.mp4\",\"label\":\"static('public')\"}",
+          "match": [
+            {
+              "value": "${path}",
+              "matchRegex": "(?i)^/vid/1\\.mp4[/#\\?]?$"
+            }
+          ],
+          "matchResp": [],
+          "cache": {
+            "maxAgeSeconds": 315360000
+          },
+          "route": {
+            "action": "proxy",
+            "backend": "__static__",
+            "fsPath": [
+              "/public/vid/1.mp4"
+            ],
+            "fallbackToCompute": false
+          },
+          "transform": {
+            "request": [
+              {
+                "action": "update-path",
+                "valueRegex": "(?i)^/vid/1\\.mp4[/#\\?]?$",
+                "replaceValue": "/public/vid/1.mp4"
+              }
+            ],
+            "upstreamResponse": [
+              {
+                "action": "set-header",
+                "name": "vary",
+                "value": "accept-encoding"
+              }
+            ],
+            "response": []
+          }
+        },
+        {
+          "path": "/_next/webpack-hmr",
+          "routeJson": "{\"path\":\"/_next/webpack-hmr\"}",
+          "match": [
+            {
+              "value": "${path}",
+              "matchRegex": "(?i)^/_next/webpack-hmr[/#\\?]?$"
+            }
+          ],
+          "matchResp": [],
+          "transform": {
+            "request": [],
+            "upstreamResponse": [],
+            "response": []
+          }
+        },
+        {
+          "path": "/_next/static/:path*",
+          "routeJson": "{\"path\":\"/_next/static/:path*\"}",
+          "match": [
+            {
+              "value": "${path}",
+              "matchRegex": "(?i)^/_next/static(?:/((?:[^/#\\?]+?)(?:/(?:[^/#\\?]+?))*))?[/#\\?]?$"
+            }
+          ],
+          "matchResp": [],
+          "cache": {
+            "maxAgeSeconds": 315360000
+          },
+          "route": {
+            "action": "proxy",
+            "backend": "__permanent_static__",
+            "fsPath": [
+              "/.next/static/:path*"
+            ],
+            "fsExclude": [
+              ".next/static/service-worker.js"
+            ],
+            "fallbackToCompute": false
+          },
+          "transform": {
+            "request": [
+              {
+                "action": "update-path",
+                "valueRegex": "(?i)^/_next/static(?:/((?:[^/#\\?]+?)(?:/(?:[^/#\\?]+?))*))?[/#\\?]?$",
+                "replaceValue": "/.next/static/\\1"
+              }
+            ],
+            "upstreamResponse": [
+              {
+                "action": "set-header",
+                "name": "vary",
+                "value": "accept-encoding"
+              }
+            ],
+            "response": [
+              {
+                "action": "set-header",
+                "name": "cache-control",
+                "value": "private, max-age=315360000"
+              }
+            ]
+          }
+        },
+        {
+          "path": "/autostatic/:path*",
+          "routeJson": "{\"path\":\"/autostatic/:path*\"}",
+          "match": [
+            {
+              "value": "${path}",
+              "matchRegex": "(?i)^/autostatic(?:/((?:[^/#\\?]+?)(?:/(?:[^/#\\?]+?))*))?[/#\\?]?$"
+            }
+          ],
+          "matchResp": [],
+          "cache": {
+            "maxAgeSeconds": 315360000
+          },
+          "route": {
+            "action": "proxy",
+            "backend": "__permanent_static__",
+            "fsPath": [
+              "/.next/static/:path*"
+            ],
+            "fsExclude": [
+              ".next/static/service-worker.js"
+            ],
+            "fallbackToCompute": false
+          },
+          "transform": {
+            "request": [
+              {
+                "action": "update-path",
+                "valueRegex": "(?i)^/autostatic(?:/((?:[^/#\\?]+?)(?:/(?:[^/#\\?]+?))*))?[/#\\?]?$",
+                "replaceValue": "/.next/static/\\1"
+              }
+            ],
+            "upstreamResponse": [
+              {
+                "action": "set-header",
+                "name": "vary",
+                "value": "accept-encoding"
+              }
+            ],
+            "response": [
+              {
+                "action": "set-header",
+                "name": "cache-control",
+                "value": "private, max-age=315360000"
+              }
+            ]
+          }
+        },
+        {
+          "path": "/_next/image",
+          "routeJson": "{\"path\":\"/_next/image\"}",
+          "match": [
+            {
+              "value": "${path}",
+              "matchRegex": "(?i)^/_next/image[/#\\?]?$"
+            }
+          ],
+          "matchResp": [],
+          "route": {
+            "action": "proxy",
+            "backend": "__image_optimizer__"
+          },
+          "transform": {
+            "request": [
+              {
+                "action": "update-path",
+                "valueRegex": "(?i)^/_next/image[/#\\?]?$",
+                "replaceValue": "/__layer0_image_optimizer"
+              }
+            ],
+            "upstreamResponse": [
+              {
+                "action": "set-header",
+                "name": "vary",
+                "value": "accept-encoding"
+              }
+            ],
+            "response": []
+          }
+        },
+        {
+          "path": "/_next/server/:file*",
+          "routeJson": "{\"path\":\"/_next/server/:file*\"}",
+          "match": [
+            {
+              "value": "${path}",
+              "matchRegex": "(?i)^/_next/server(?:/((?:[^/#\\?]+?)(?:/(?:[^/#\\?]+?))*))?[/#\\?]?$"
+            }
+          ],
+          "matchResp": [],
+          "cache": {
+            "maxAgeSeconds": 315360000
+          },
+          "route": {
+            "action": "proxy",
+            "backend": "__static__",
+            "fsPath": [
+              "/.next/server/:file*"
+            ],
+            "fallbackToCompute": false
+          },
+          "transform": {
+            "request": [
+              {
+                "action": "update-path",
+                "valueRegex": "(?i)^/_next/server(?:/((?:[^/#\\?]+?)(?:/(?:[^/#\\?]+?))*))?[/#\\?]?$",
+                "replaceValue": "/.next/server/\\1"
+              }
+            ],
+            "upstreamResponse": [
+              {
+                "action": "set-header",
+                "name": "vary",
+                "value": "accept-encoding"
+              }
+            ],
+            "response": []
+          }
+        },
+        {
+          "path": "/_error",
+          "routeJson": "{\"path\":\"/_error\"}",
+          "match": [
+            {
+              "value": "${path}",
+              "matchRegex": "(?i)^/_error[/#\\?]?$"
+            }
+          ],
+          "matchResp": [],
+          "route": {
+            "action": "proxy",
+            "backend": "__js__"
+          },
+          "transform": {
+            "request": [],
+            "upstreamResponse": [
+              {
+                "action": "set-header",
+                "name": "vary",
+                "value": "accept-encoding"
+              },
+              {
+                "action": "update-header",
+                "name": "cache-control",
+                "valueRegex": "(,\\s*\\bprivate\\b\\s*)|(^\\s*private,\\s*)",
+                "replaceValue": ""
+              }
+            ],
+            "response": []
+          }
+        },
+        {
+          "path": "/about",
+          "routeJson": "{\"path\":\"/about\"}",
+          "match": [
+            {
+              "value": "${path}",
+              "matchRegex": "(?i)^/about[/#\\?]?$"
+            }
+          ],
+          "matchResp": [],
+          "route": {
+            "action": "proxy",
+            "backend": "__static__",
+            "fsPath": [
+              "/.next/serverless/pages/about.html"
+            ],
+            "fallbackToCompute": true
+          },
+          "transform": {
+            "request": [
+              {
+                "action": "update-path",
+                "valueRegex": "(?i)^/about[/#\\?]?$",
+                "replaceValue": "/.next/serverless/pages/about.html"
+              }
+            ],
+            "upstreamResponse": [
+              {
+                "action": "set-header",
+                "name": "vary",
+                "value": "accept-encoding"
+              }
+            ],
+            "response": []
+          }
+        },
+        {
+          "path": "/gallery",
+          "routeJson": "{\"path\":\"/gallery\"}",
+          "match": [
+            {
+              "value": "${path}",
+              "matchRegex": "(?i)^/gallery[/#\\?]?$"
+            }
+          ],
+          "matchResp": [],
+          "route": {
+            "action": "proxy",
+            "backend": "__static__",
+            "fsPath": [
+              "/.next/serverless/pages/gallery.html"
+            ],
+            "fallbackToCompute": true
+          },
+          "transform": {
+            "request": [
+              {
+                "action": "update-path",
+                "valueRegex": "(?i)^/gallery[/#\\?]?$",
+                "replaceValue": "/.next/serverless/pages/gallery.html"
+              }
+            ],
+            "upstreamResponse": [
+              {
+                "action": "set-header",
+                "name": "vary",
+                "value": "accept-encoding"
+              }
+            ],
+            "response": []
+          }
+        },
+        {
+          "path": "/",
+          "routeJson": "{\"path\":\"/\"}",
+          "match": [
+            {
+              "value": "${path}",
+              "matchRegex": "(?i)^/[/#\\?]?$"
+            }
+          ],
+          "matchResp": [],
+          "route": {
+            "action": "proxy",
+            "backend": "__static__",
+            "fsPath": [
+              "/.next/serverless/pages/index.html"
+            ],
+            "fallbackToCompute": true
+          },
+          "transform": {
+            "request": [
+              {
+                "action": "update-path",
+                "valueRegex": "(?i)^/[/#\\?]?$",
+                "replaceValue": "/.next/serverless/pages/index.html"
+              }
+            ],
+            "upstreamResponse": [
+              {
+                "action": "set-header",
+                "name": "vary",
+                "value": "accept-encoding"
+              }
+            ],
+            "response": []
+          }
+        },
+        {
+          "path": "/video",
+          "routeJson": "{\"path\":\"/video\"}",
+          "match": [
+            {
+              "value": "${path}",
+              "matchRegex": "(?i)^/video[/#\\?]?$"
+            }
+          ],
+          "matchResp": [],
+          "route": {
+            "action": "proxy",
+            "backend": "__static__",
+            "fsPath": [
+              "/.next/serverless/pages/video.html"
+            ],
+            "fallbackToCompute": true
+          },
+          "transform": {
+            "request": [
+              {
+                "action": "update-path",
+                "valueRegex": "(?i)^/video[/#\\?]?$",
+                "replaceValue": "/.next/serverless/pages/video.html"
+              }
+            ],
+            "upstreamResponse": [
+              {
+                "action": "set-header",
+                "name": "vary",
+                "value": "accept-encoding"
+              }
+            ],
+            "response": []
+          }
+        },
+        {
+          "path": "/404",
+          "routeJson": "{\"path\":\"/404\"}",
+          "match": [
+            {
+              "value": "${path}",
+              "matchRegex": "(?i)^/404[/#\\?]?$"
+            }
+          ],
+          "matchResp": [],
+          "route": {
+            "action": "proxy",
+            "backend": "__static__",
+            "fsPath": [
+              "/.next/serverless/pages/404.html"
+            ],
+            "fallbackToCompute": true
+          },
+          "transform": {
+            "request": [
+              {
+                "action": "update-path",
+                "valueRegex": "(?i)^/404[/#\\?]?$",
+                "replaceValue": "/.next/serverless/pages/404.html"
+              }
+            ],
+            "upstreamResponse": [
+              {
+                "action": "set-header",
+                "name": "vary",
+                "value": "accept-encoding"
+              }
+            ],
+            "response": []
+          }
+        },
+        {
+          "routeJson": "{}",
+          "match": [],
+          "matchResp": [],
+          "route": {
+            "action": "proxy",
+            "backend": "__js__"
+          },
+          "transform": {
+            "request": [],
+            "upstreamResponse": [
+              {
+                "action": "set-header",
+                "name": "vary",
+                "value": "accept-encoding"
+              },
+              {
+                "action": "update-header",
+                "name": "cache-control",
+                "valueRegex": "(,\\s*\\bprivate\\b\\s*)|(^\\s*private,\\s*)",
+                "replaceValue": ""
+              }
+            ],
+            "response": []
+          }
+        }
+      ]
+    }
+  }
+}
