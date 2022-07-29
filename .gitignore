@@ -7,6 +7,7 @@
 
 #IDE
 .idea
+.layer0
 
 # build
 .next
