@@ -11,21 +11,14 @@ new Prefetcher({
     plugins: [
 
         new DeepFetchPlugin([
-            // Deep fetching of images
+            // Deep fetch all images on page
             {
-                selector: 'img.prefetched', // CSS selector syntax - just like you would use with document.querySelector()
+                selector: 'img', // CSS selector syntax - just like you would use with document.querySelector()
                 maxMatches: 100, // limits the number of matched elements to prefetch to 1 per page
                 attribute: 'src', // the attribute holding the URL to prefetching
                 as: 'image', // the type of asset being prefetched
             },
-            // Deep fetching of videos
-            {
-                selector: 'video.prefetched', // CSS selector syntax - just like you would use with document.querySelector()
-                maxMatches: 100, // limits the number of matched elements to prefetch to 1 per page
-                attribute: 'src', // the attribute holding the URL to prefetching
-                as: 'video', // the type of asset being prefetched
-            },
-            // Deep fetch images
+            // Deep fetch all images on page
             {
                 selector: 'img', // CSS selector syntax - just like you would use with document.querySelector()
                 callback: el => {
